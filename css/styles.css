@@ -11,18 +11,39 @@ body{
     margin-right: auto;
 }
 
-
-
-button {
+header{
     display: flex;
-    background-color: navy;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
+    justify-content: space-between;
+}
+
+main{
+    display: flex;
+    background-color: aqua;
     justify-content: center;
+    text-align: center;
+    padding: 20px;
+    width: 50%;
+}
+
+#questions{
+    text-decoration: none;
+    min-width: 300px;
+}
+
+#title{
+    justify-content: center;
+}
+
+#questions {
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+li {
+    background-color: navy;
+    margin: 5%;
+    padding: 5%;
 }
 
 @media screen and (max-width: 1183px) {

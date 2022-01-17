@@ -11,29 +11,31 @@
 </head>
 
 <body>
-    
 
-    <div class="button" id="startGame">
+
+    <header id="startGame">
+        <p>Score : </p>
         <button>Start Game</button>
-    </div>
+        <p id="timer">0:00</p>
+    </header>
 
-    <div>
+    <main>
         <div>
-            <p id="title">Start Game</p>
-        </div>
-        <div>
-            <ul id="questions">
-                <button id="button_1"><li>1.</li><p id="question_1"></p></button>
-                <button id="button_2"><li>2.</li><p id="question_2"></p></button>
-                <button id="button_3"><li>3.</li><p id="question_3"></p></button>
-                <button id="button_4"><li>4.</li><p id="question_4"></p></button>
-            </ul>
-        </div>
-        <div>
-            <p id="timer">0:00</p>
-        </div>
-    </div>
+            <div>
+                <p id="title">Start Game</p>
+            </div>
+            <div>
+                <ol id="questions">
 
+                    <li id="answer_1"></li>
+                    <li id="answer_2"></li>
+                    <li id="answer_3"></li>
+                    <li id="answer_4"></li>
+
+                </ol>
+            </div>
+        </div>
+    </main>
 
     <script src="./js/questions.js"></script>
     <script src="./js/quiz.js"></script>

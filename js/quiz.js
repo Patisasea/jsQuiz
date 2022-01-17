@@ -9,6 +9,12 @@ var questionsDone = [];
 var duration = 300;
 var minutes;
 var seconds;
+var title = document.querySelector(title);
+var answer_1 = document.querySelector(".answer_1");
+var answer_2 = document.querySelector(".answer_2");
+var answer_3 = document.querySelector(".answer_3");
+var answer_4 = document.querySelector(".answer_4");
+var time = document.querySelector("#timer");
 
 document.getElementById("startGame").addEventListener("click", function () {
     quiz();
@@ -24,6 +30,9 @@ function timerRun() {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
+        time.textContent = minutes + ":" + seconds;
+
+        --timer;
     }, 1000);
 
 }
@@ -38,6 +47,8 @@ function quiz() {
 
 
         question = questions[questionActive];
+
+        title = questions.title;
 
         console.log(questionActive);
 
