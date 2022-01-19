@@ -1,29 +1,42 @@
 
-var questionActive;
+var questionActiveNumber;
+var activeQuestion;
 var question;
 var answer;
 var choices;
-var choice;
+var choice = -1;
 var timer;
 var questionsDone = [];
 var duration = 300;
 var minutes;
 var seconds;
-var title = document.querySelector(title);
-var answer_1 = document.querySelector(".answer_1");
-var answer_2 = document.querySelector(".answer_2");
-var answer_3 = document.querySelector(".answer_3");
-var answer_4 = document.querySelector(".answer_4");
+var timeLeft;
+var score;
+var scores = document.querySelector("aside")
+var title = document.querySelector("#title");
+var answers = document.querySelector("#questions");
 var time = document.querySelector("#timer");
+var main = document.querySelector("main");
 
 document.getElementById("startGame").addEventListener("click", function () {
     quiz();
 });
 
+document.getElementById("showHighScores").addEventListener("click", function(){
+    scores.classList.toggle("hidden")
+});
+
+for (var i = 0; i <= 3; i++) {
+    answers.childNodes[i].addEventListener("click", function () {
+        choice = i;
+        console.log(choice);
+    });
+}
 
 function timerRun() {
     timer = duration;
-    setInterval(function () {
+    clearInterval(timeLeft);
+    timeLeft = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -32,8 +45,17 @@ function timerRun() {
 
         time.textContent = minutes + ":" + seconds;
 
-        --timer;
+        timer--;
+        
+        if (timer <= 0) {
+        clearInterval(timeLeft);
+        return;
+    } else if (questionsDone.length === questions.length) {
+        clearInterval(timeLeft);
+        return;
+    }
     }, 1000);
+
 
 }
 
@@ -41,35 +63,71 @@ function quiz() {
 
     timerRun();
 
-    questionActive = Math.floor(Math.random() * questions.length);
+    if (main.classList == "hidden") {
+        main.classList.toggle("hidden");
+    }
+
+    questionActiveNumber = Math.floor(Math.random() * questions.length);
 
     while (timer > 0 && questionsDone.length < questions.length) {
 
+        if (questionsDone.includes(questionActiveNumber)) {
+            activeQuestion = questions[questionActiveNumber];
 
-        question = questions[questionActive];
+            question = activeQuestion.title;
 
-        title = questions.title;
+            console.log(questionActiveNumber);
 
-        console.log(questionActive);
 
-        questionsDone.push(questionActive);
+            console.log(question);
 
-        console.log(question.title);
+            title.textContent = question;
 
-        choices = question.choices;
+            choices = activeQuestion.choices;
 
-        console.log(choices);
+            console.log(choices);
 
-        while (questionsDone.includes(questionActive)) {
-
-            questionActive = Math.floor(Math.random() * questions.length);
-
-            if (questionsDone.length == questions.length) {
-                break;
+            for (let i = 0; i < 4; i++) {
+                answers.children[i].textContent = choices[i];
             }
         }
+
+
+        if (choice === -1) {
+
+        } else {
+
+            questionsDone.push(questionActiveNumber);
+
+            while (questionsDone.includes(questionActiveNumber)) {
+
+                questionActiveNumber = Math.floor(Math.random() * questions.length);
+
+                if (questionsDone.length === questions.length) {
+                    break;
+                }
+            }
+
+        }
+
     }
 
+    // if (main.classList != "hidden") {
+    //     main.classList.toggle("hidden");
+    // }
+
+
+
+
+    if (timer === 0) {
+        console.log("You're score is" + score + ".");
+        return;
+
+    }
+    else if (questionsDone.length === questions.length) {
+        console.log("You're score is" + score + ".")
+        return;
+    }
 
     console.log(questionsDone.length);
 }
